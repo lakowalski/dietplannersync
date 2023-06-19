@@ -30,7 +30,7 @@ class MinutaOsiemApi:
     def _get_request(self, path):
         return self.session.get('https://%s%s' % (API_HOST, path))
 
-###
+    ###
 
     def list_diets(self):
         resp = self._get_request("/frontend/secure/my-diets?pagination=false")
@@ -48,7 +48,7 @@ class MinutaOsiemApi:
         resp = self._get_request("/frontend/secure/bags/%s/change-menu-options" % bag_id)
         options = resp.json().get('options')
         dishes = sum([ item.get('dishes') for item in options.values() ], [])
-        dish = [i for i in dishes if i['id'] == dish_id ][0]
+        dish = [i for i in dishes if i['id'] == dish_id][0]
         return dish
 
     def describe_dishes_in_bag(self, bag_id):
@@ -98,7 +98,9 @@ class MinutaOsiemCaterer:
         meal_name_map = {
             "II śniadanie": "second_breakfast", 
             "Lunch": "dinner", 
-            "Przekąska": "snack"
+            "Przekąska": "snack",
+            "Lunch Keto ": "dinner", 
+            "Przekąska Keto": "snack", 
         }
 
         for dish in dishes:
